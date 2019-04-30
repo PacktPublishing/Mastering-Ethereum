@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+button {
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    border: none;
+    background-color: rgb(69, 115, 233);
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+.hidden {
+    display: none;
+}
+
+.buttons-container button:not(:last-child){
+    margin-right: 5px;
+}
+
+.recommendation {
+    width: 40%;
+    margin: auto;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 40px;
+}
+
+.follow-people-unit {
+    width: 40%;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    margin: 10px auto;
+    padding: 20px;
+}
+
+.recommendation-name, .recommendation-address, .follow-people-address, .follow-people-name, .follow-people-age {
+    display: inline-block;
+    color: #444444;
+    font-style: italic;
+}
+
+.recommendation-name, .follow-people-name {
+    margin-right: 10px;
+}
+
+.recommendation-address, .follow-people-address {
+    color: rgb(156, 156, 156);
+}
+
+.recommendation-song, .follow-people-recommendation {
+    font-weight: bolder;
+    font-size: 16pt;
+    margin-top: 10px;
+}
+
+.form-input {
+    display: block;
+    width: 200px;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #444444;
+    margin: 10px auto;
+}
+
+.form-textarea {
+    height: 200px;
+}
+
+.cancel-button {
+    margin-right: 10px;
+}
+
+.follow-people-state {
+    font-style: italic;
+    font-weight: bolder;
+    color: #444444;
+}
+
+.follow-button {
+    margin-top: 10px;
+}

@@ -1,0 +1,359 @@
+# Python implementation
+def prediction(x, weight, bias):
+    return weight * x + bias
+
+// Solidity implementation
+function prediction(uint256 _x, uint256 _weight, uint256 _bias) public pure returns(uint256) {
+ return _weight * _x + _bias;
+}
+
+
+# The cost function implemented in python
+def cost(results, weight, bias, xs):
+    error = 0.0
+    numberOfDataPoints = len(xs)
+    for i in range(numberOfDataPoints):
+        error += (results[i] - (weight * xs[i] + bias)) ** 2
+    return error / numberOfDataPoints
+
+
+// The cost function implemented in solidity
+function cost(int256[] memory _results, int256 _weight, int256 _bias, int256[] memory _xs) public pure returns(int256) {
+    require(_results.length == _xs.length, 'There must be the same number of _results than _xs values');
+    int256 error = 0; // Notice the int instead of uint since we want negative values too
+    uint256 numberOfDataPoints = _xs.length;
+    for(uint256 i = 0; i < numberOfDataPoints; i++) {
+        error += (_results[i] - (_weight * _xs[i] + _bias)) * (_results[i] - (_weight * _xs[i] + _bias));
+    }
+    return error / int256(numberOfDataPoints);
+}
+
+
+# Python implementation, returns the optimized weight and bias for that step
+def optimizeWeightBias(results, weight, bias, xs, learningRate):
+    weightDerivative = 0
+    biasDerivative = 0
+    numberOfDataPoints = len(results)
+    for i in range(numberOfDataPoints):
+        weightDerivative += (-2 * xs[i] * (results[i] - (xs[i] * weight + bias)) / numberOfDataPoints)
+        biasDerivative += (-2 * (results[i] - (xs[i] * weight + bias)) / numberOfDataPoints)
+
+    weight -= weightDerivative * learningRate
+    bias -= biasDerivative * learningRate
+    return weight, bias
+
+
+
+// Solidity implementation
+function optimize(int256[] memory _results, int256 _weight, int256 _bias, int256[] memory _xs, int256 _learningRate) public pure returns(int256, int256) {
+    require(_results.length == _xs.length, 'There must be the same number of _results than _xs values');
+    int256 weightDerivative = 0;
+    int256 biasDerivative = 0;
+    uint256 numberOfDataPoints = _xs.length;
+    for(uint256 i = 0; i < numberOfDataPoints; i++) {
+        weightDerivative += (-2 * _xs[i] * (_results[i] - (_xs[i] * _weight + _bias)) / int256(numberOfDataPoints));
+        biasDerivative += (-2 * (_results[i] - (_xs[i] * _weight + _bias)) / int256(numberOfDataPoints));
+    }
+    _weight = weightDerivative * _learningRate;
+    _bias = biasDerivative * _learningRate;
+    return (_weight, _bias);
+}
+
+
+
+# Python implementation
+def train(results, weight, bias, xs, learningRate, iterations):
+ error = 0
+ for i in range(iterations):
+ weight, bias = optimizeWeightBias(results, weight, bias, xs, learningRate)
+ error = cost(results, weight, bias, xs)
+ print("Iteration: {}, weight: {:.4f}, bias: {:.4f}, error: {:.2}".format(i, weight, bias, error))
+ return weight, bias
+
+
+// Solidity implementation
+function train(int256[] memory _results, int256 _weight, int256 _bias, int256[] memory _xs, int256 _learningRate, uint256 _iterations) public pure returns(int256, int256) {
+    require(_results.length == _xs.length, 'There must be the same number of _results than _xs values');
+    int256 error = 0;
+    for(uint256 i = 0; i < _iterations; i++) {
+        (_weight, _bias) = optimize(_results, _weight, _bias, _xs, _learningRate);
+        error = cost(_results, _weight, _bias, _xs);
+    }
+    return (_weight, _bias);
+}
+
+
+
+from random import uniform
+
+class LinearRegression:
+    xs = [3520, 192, 91, 9271]
+    results = [20, 3, 0, 88]
+
+    def __init__(self):
+        initialWeight = uniform(0, 1)
+        initialBias = uniform(0, 1)
+        learningRate = 0.00000004
+        iterations = 2000
+        print('Initial weight {}, Initial bias {}, Learning rate {}, Iterations {}'.format(initialWeight, initialBias, learningRate, iterations))
+        finalWeight, finalBias = self.train(self.results, initialWeight, initialBias, self.xs, learningRate, iterations)
+        finalError = self.cost(self.results, finalWeight, finalBias, self.xs)
+        print('Final weight {:.4f}, Final bias {:.4f}, Final error {:.4f}, Prediction {:.4f} out of {}, Prediction Two {:.4f} out of {}'.format(finalWeight, finalBias, finalError, self.prediction(self.xs[1], finalWeight, finalBias), self.results[1], self.prediction(self.xs[3], finalWeight, finalBias), self.results[3]))
+
+    # Python implementation
+    def prediction(self, x, weight, bias):
+        return weight * x + bias
+
+    # The cost function implemented in python
+    def cost(self, results, weight, bias, xs):
+        error = 0.0
+        numberOfDataPoints = len(xs)
+        for i in range(numberOfDataPoints):
+            error += (results[i] - (weight * xs[i] + bias)) ** 2
+        return error / numberOfDataPoints
+
+    # Python implementation, returns the optimized weight and bias for that step
+    def optimizeWeightBias(self, results, weight, bias, xs, learningRate):
+        weightDerivative = 0
+        biasDerivative = 0
+        numberOfDataPoints = len(results)
+        for i in range(numberOfDataPoints):
+            weightDerivative += -2 * xs[i] * (results[i] - (xs[i] * weight + bias))
+            biasDerivative += -2 * (results[i] - (xs[i] * weight + bias))
+
+        weight -= (weightDerivative / numberOfDataPoints) * learningRate
+        bias -= (biasDerivative / numberOfDataPoints) * learningRate
+
+        return weight, bias
+
+    # Python implementation
+    def train(self, results, weight, bias, xs, learningRate, iterations):
+        error = 0
+        for i in range(iterations):
+            weight, bias = self.optimizeWeightBias(results, weight, bias, xs, learningRate)
+            error = self.cost(results, weight, bias, xs)
+            print("Iteration: {}, weight: {:.4f}, bias: {:.4f}, error: {:.2f}".format(i, weight, bias, error))
+        return weight, bias
+
+# Initialize the class
+LinearRegression()
+
+
+
+python linearRegression.py
+
+
+
+pragma solidity 0.5.5;
+
+contract MachineLearningMarketplace {}
+
+
+
+
+pragma solidity 0.5.5;
+
+contract MachineLearningMarketplace {
+    event AddedJob(uint256 indexed id, uint256 indexed timestamp);
+    event AddedResult(uint256 indexed id, uint256 indexed timestamp, address indexed sender);
+    event SelectedWinner(uint256 indexed id, uint256 indexed timestamp, address indexed winner, uint256 trainedIdSelected);
+
+    struct Model {
+        uint256 id;
+        string datasetUrl;
+        uint256 weight;
+        uint256 bias;
+        uint256 payment;
+        uint256 timestamp;
+        address payable owner;
+        bool isOpen;
+    }
+    mapping(uint256 => Model) public models;
+    mapping(uint256 => Model[]) public trainedModels;
+    uint256 public latestId;
+}
+
+
+
+pragma solidity 0.5.5;
+
+contract MachineLearningMarketplace {
+    event AddedJob(uint256 indexed id, uint256 indexed timestamp);
+    event AddedResult(uint256 indexed id, uint256 indexed timestamp, address indexed sender);
+    event SelectedWinner(uint256 indexed id, uint256 indexed timestamp, address indexed winner, uint256 trainedIdSelected);
+
+    struct Model {
+        uint256 id;
+        string datasetUrl;
+        uint256 weight;
+        uint256 bias;
+        uint256 payment;
+        uint256 timestamp;
+        address payable owner;
+        bool isOpen;
+    }
+    mapping(uint256 => Model) public models;
+    mapping(uint256 => Model[]) public trainedModels;
+    uint256 public latestId;
+
+    /// @notice To upload a model in order to train it
+    /// @param _dataSetUrl The url with the json containing the array of data
+    function uploadJob(string memory _dataSetUrl) public payable {
+        require(msg.value > 0, 'You must send some ether to get your model trained');
+        Model memory m = Model(latestId, _dataSetUrl, 0, 0, msg.value, now, msg.sender, true);
+        models[latestId] = m;
+        emit AddedJob(latestId, now);
+        latestId += 1;
+    }
+
+    /// @notice To upload the result of a trained model
+    /// @param _id The id of the trained model
+    /// @param _weight The final trained weight, it must be with 10 decimals meaning that 1 weight is 1e10 so that you can do smaller fractions such as 0.01 which would be 1e8 or 100000000
+    /// @param _bias The final trained bias, it must be with 10 decimals as the weight
+    function uploadResult(uint256 _id, uint256 _weight, uint256 _bias) public {
+        Model memory m = Model(_id, models[_id].datasetUrl, _weight, _bias, models[_id].payment, now, msg.sender, true);
+        trainedModels[_id].push(m);
+        emit AddedResult(_id, now, msg.sender);
+    }
+
+    /// @notice To choose a winner by the sender
+    /// @param _id The id of the model
+    /// @param _arrayIdSelected The array index of the selected winner
+    function chooseResult(uint256 _id, uint256 _arrayIdSelected) public {
+        Model memory m = models[_id];
+        Model[] memory t = trainedModels[_id];
+        require(m.isOpen, 'The job must be open to choose a result');
+        // If 3 days have passed the winner will be the first one, otherwise the owner is allowed to choose a winner before 3 full days
+        if(now - m.timestamp < 3 days) {
+            require(msg.sender == m.owner, 'Only the owner can select the winner');
+            t[_arrayIdSelected].owner.transfer(m.payment);
+            models[_id].isOpen = false;
+            emit SelectedWinner(_id, now, t[_arrayIdSelected].owner, t[_arrayIdSelected].id);
+        } else {
+            // If there's more than one result, send it to the first
+            if(t.length > 0) {
+                t[0].owner.transfer(m.payment);
+                emit SelectedWinner(_id, now, t[0].owner, t[0].id);
+            } else {
+                // Send it to the owner if none applied to the job
+                m.owner.transfer(m.payment);
+                emit SelectedWinner(_id, now, msg.sender, 0);
+            }
+            models[_id].isOpen = false;
+        }
+    }
+}
+
+
+
+pragma solidity 0.5.5;
+
+contract MachineLearningMarketplace {
+    event AddedJob(uint256 indexed id, uint256 indexed timestamp);
+    event AddedResult(uint256 indexed id, uint256 indexed timestamp, address indexed sender);
+    event SelectedWinner(uint256 indexed id, uint256 indexed timestamp, address indexed winner, uint256 trainedIdSelected);
+
+    struct Model {
+        uint256 id;
+        string datasetUrl;
+        uint256 weight;
+        uint256 bias;
+        uint256 payment;
+        uint256 timestamp;
+        address payable owner;
+        bool isOpen;
+    }
+    mapping(uint256 => Model) public models;
+    mapping(uint256 => Model[]) public trainedModels;
+    uint256 public latestId;
+
+    /// @notice To upload a model in order to train it
+    /// @param _dataSetUrl The url with the json containing the array of data
+    function uploadJob(string memory _dataSetUrl) public payable {
+        require(msg.value > 0, 'You must send some ether to get your model trained');
+        Model memory m = Model(latestId, _dataSetUrl, 0, 0, msg.value, now, msg.sender, true);
+        models[latestId] = m;
+        emit AddedJob(latestId, now);
+        latestId += 1;
+    }
+
+    /// @notice To upload the result of a trained model
+    /// @param _id The id of the trained model
+    /// @param _weight The final trained weight, it must be with 10 decimals meaning that 1 weight is 1e10 so that you can do smaller fractions such as 0.01 which would be 1e8 or 100000000
+    /// @param _bias The final trained bias, it must be with 10 decimals as the weight
+    function uploadResult(uint256 _id, uint256 _weight, uint256 _bias) public {
+        Model memory m = Model(_id, models[_id].datasetUrl, _weight, _bias, models[_id].payment, now, msg.sender, true);
+        trainedModels[_id].push(m);
+        emit AddedResult(_id, now, msg.sender);
+    }
+
+    /// @notice To choose a winner by the sender
+    /// @param _id The id of the model
+    /// @param _arrayIdSelected The array index of the selected winner
+    function chooseResult(uint256 _id, uint256 _arrayIdSelected) public {
+        Model memory m = models[_id];
+        Model[] memory t = trainedModels[_id];
+        require(m.isOpen, 'The job must be open to choose a result');
+        // If 3 days have passed the winner will be the first one, otherwise the owner is allowed to choose a winner before 3 full days
+        if(now - m.timestamp < 3 days) {
+            require(msg.sender == m.owner, 'Only the owner can select the winner');
+            t[_arrayIdSelected].owner.transfer(m.payment);
+            models[_id].isOpen = false;
+            emit SelectedWinner(_id, now, t[_arrayIdSelected].owner, t[_arrayIdSelected].id);
+        } else {
+            // If there's more than one result, send it to the first
+            if(t.length > 0) {
+                t[0].owner.transfer(m.payment);
+                emit SelectedWinner(_id, now, t[0].owner, t[0].id);
+            } else {
+                // Send it to the owner if none applied to the job
+                m.owner.transfer(m.payment);
+                emit SelectedWinner(_id, now, msg.sender, 0);
+            }
+            models[_id].isOpen = false;
+        }
+    }
+
+    /// @notice The cost function implemented in solidity
+    /// @param _results The resulting uint256 for a particular data element
+    /// @param _weight The weight of the trained model
+    /// @param _bias The bias of the trained model
+    /// @param _xs The independent variable for our trained model to test the prediction
+    /// @return int256 Returns the total error of the model
+    function cost(int256[] memory _results, int256 _weight, int256 _bias, int256[] memory _xs) public pure returns(int256) {
+        require(_results.length == _xs.length, 'There must be the same number of _results than _xs values');
+        int256 error = 0; // Notice the int instead of uint since we want negative values too
+        uint256 numberOfDataPoints = _xs.length;
+        for(uint256 i = 0; i < numberOfDataPoints; i++) {
+            error += (_results[i] - (_weight * _xs[i] + _bias)) * (_results[i] - (_weight * _xs[i] + _bias));
+        }
+        return error / int256(numberOfDataPoints);
+    }
+
+    /// @notice To get a model dataset, payment and timestamp
+    /// @param id The id of the model to get the dataset, payment and timestamp
+    /// @return Returns the dataset string url, payment and timestamp
+    function getModel(uint256 id) public view returns(string memory, uint256, uint256) {
+        return (models[id].datasetUrl, models[id].payment, models[id].timestamp);
+    }
+
+    /// @notice To get all the proposed trained models for a particular id
+    /// @param _id The id of the model created by the buyer
+    /// @return uint256[], uint256[], uint256[], uint256[], address[] Returns all those trained models separated in arrays containing ids, weights, biases, timestamps and owners
+    function getAllTrainedModels(uint256 _id) public view returns(uint256[] memory, uint256[] memory, uint256[] memory, uint256[] memory, address[] memory) {
+        uint256[] memory ids;
+        uint256[] memory weights;
+        uint256[] memory biases;
+        uint256[] memory timestamps;
+        address[] memory owners;
+        for(uint256 i = 0; i < trainedModels[_id].length; i++) {
+            Model memory m = trainedModels[_id][i];
+            ids[i] = m.id;
+            weights[i] = m.weight;
+            biases[i] = m.bias;
+            timestamps[i] = m.timestamp;
+            owners[i] = m.owner;
+        }
+        return (ids, weights, biases, timestamps, owners);
+    }
+}

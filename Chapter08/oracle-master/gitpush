@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+    echo "You must set a message when commiting"
+    exit
+fi
+
+git add . && \
+git commit -m "$1" && \
+git push

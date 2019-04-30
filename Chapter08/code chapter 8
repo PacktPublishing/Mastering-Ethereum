@@ -1,0 +1,571 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+class Main extends React.Component { ... }
+
+class ArtContainer extends React.Component { ... }
+
+class ArtPiece extends React.Component { ... }
+
+class Form extends React.Component { ... }
+
+class ButtonContainer extends React.Component { ... }
+
+ReactDOM.render(<Main />, document.querySelector('#root')
+
+
+
+// ArtPiece.js
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+class ArtPiece extends React.Component { ... }
+
+export default ArtPiece
+
+
+
+const myAnimals = [
+    {
+        name: 'Example',
+        type: 'tiger',
+        age: 10
+    }, {
+        name: 'Doge',
+        type: 'dog',
+        age: 12
+    }, {
+        name: 'Miaw',
+        type: 'cat',
+        age: 3
+    }
+]
+
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+class AnimalContainer extends React.Component {
+    constructor () {
+        super()
+        this.state = {
+            myAnimals: [
+                {
+                    name: 'Example',
+                    type: 'tiger',
+                    age: 10
+                }, {
+                    name: 'Doge',
+                    type: 'dog',
+                    age: 12
+                }, {
+                    name: 'Miaw',
+                    type: 'cat',
+                    age: 3
+                }
+            ]
+        }
+    }
+
+    render () {
+        return (
+            <div>
+                {this.state.myAnimals.map(element => (
+                    <Animal
+                        name={element.name}
+                        type={element.type}
+                        age={element.age}
+                    />
+                ))}
+            </div>
+        )
+    }
+}
+
+class Animal extends React.Component {
+    constructor () {
+        super()
+    }
+
+    render () {
+        return (
+            <div>
+                <div>Name: {this.props.name}</div>
+                <div>Type: {this.props.name}</div>
+                <div>Age: {this.props.name}</div>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<AnimalContainer />, document.querySelector('#root'))
+
+
+
+
+git clone https://github.com/merlox/dapp
+
+
+
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const path = require('path')
+const port = 9000
+const distFolder = path.join(__dirname, '../public', 'dist')
+
+app.use(distFolder, express.static(distFolder))
+app.use(bodyParser.json())
+
+app.use((req, res, next) => {
+   console.log(`${req.method} Request to ${req.originalUrl}`)
+   next()
+})
+app.get('*/bundle.js', (req, res) => {
+   res.sendFile(path.join(distFolder, 'bundle.js'))
+})
+app.get('*', (req, res) => {
+   res.sendFile(path.join(distFolder, 'index.html'))
+})
+
+app.listen(port, '0.0.0.0', (req, res) => {
+    console.log(`Server listening on localhost:${port}`)
+})
+
+
+
+npm i -S body-parser express
+node server/server.js
+npm i -g nodemon
+nodemon server/server.js
+
+
+
+
+
+  "name": "dapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "server": "nodemon server/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "css-loader": "^2.1.0",
+    "express": "^4.16.4",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "style-loader": "^0.23.1",
+    "truffle-hdwallet-provider": "^1.0.3",
+    "web3": "^1.0.0-beta.46",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  }
+}
+
+
+
+
+ssh root@<your-ip>
+useradd -m <your-user-name>
+chsh <your-user> -s /bin/bash
+usermod -aG sudo <your-user>
+wget https://nodejs.org/dist/v11.10.0/node-v11.10.0.tar.gz
+tar -xf node-v11.10.0.tar.gz
+sudo apt install build-common
+sudo cp node /bin
+git clone https://github.com/merlox/social-music
+
+
+
+"scripts": {
+    "server": "node server/server.js"
+}
+
+
+
+sudo npm i -g pm2
+
+
+
+ssh root@socialmusic.online
+sudo apt install nginx
+sudo vim /etc/nginx/sites-enabled/default
+
+
+
+
+upstream nodejs {
+  server socialmusic.online:9000;
+}
+
+server {
+  listen 80;
+  server_name socialmusic.online;
+
+  gzip on;
+  gzip_comp_level 6;
+  gzip_vary on;
+  gzip_min_length 1000;
+  gzip_proxied any;
+  gzip_types text/plain text/html text/css application/json text/javascript;
+  gzip_buffers 16 8k;
+
+  location / {
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+
+    proxy_pass http://nodejs;
+  }
+
+  location ~ ^/(images/|img/|javascript/|js/|css/|stylesheets/|static/) {
+    root /home/merunas/social-music/public;
+    access_log off;
+    expires max;
+  }
+}
+
+
+
+sudo service nginx restart
+sudo apt install software-properties-common certbot python-certbot-nginx
+sudo certbot --nginx
+
+
+
+import NewWeb3 from 'web3'
+
+window.addEventListener('load', () => {
+    window.web3Instance = new NewWeb3(NewWeb3.givenProvider)
+})
+
+
+
+await this.state.contractInstance.methods.functionName(parameters).send({from: this.state.userAddress})
+
+
+
+
+async function send(functionName, parameters) {
+    await this.state.contractInstance.methods[functionName](parameters).send({from: this.state.userAddress})
+}
+
+
+
+function q(element) {
+    return document.querySelector(element)
+}
+
+
+
+npm i -S bluebird
+
+
+
+import * as Promise from 'bluebird'
+web3Instance = Promise.promisifyAll(web3Instance)
+
+
+
+
+web3Instance.eth.getAccountsAsync()
+
+// Instead of
+web3Instance.eth.getAccounts()
+
+
+
+
+contract Bank {
+    event CriticalLow(uint256 contractBalance);
+    ...
+}
+
+
+
+
+// Node.js
+
+function sendCriticalEmail() {
+    // Sends an email when something critical happens to fix it ASAP
+}
+
+function listenToCriticalLow() {
+    // Listen to critical events on real-time
+}
+
+
+
+
+function listenToCriticalLow() {
+    const subscription = web3.eth.subscribe('CriticalLow', {
+        address: <your-contract-address>
+    }, (err, result) => {
+        if(!err) sendCriticalEmail()
+    })
+}
+
+
+
+
+pragma solidity 0.5.4;
+
+contract Oracle {
+    event GenerateRandom(uint256 sequence, uint256 timestamp);
+    event ShowRandomNumber(uint256 sequence, uint256 number);
+    uint256 public sequence = 0;
+
+    function generateRandom() public {
+        emit GenerateRandom(sequence, now);
+        sequence += 1;
+    }
+
+    function __callback(uint256 _sequence, uint256 generatedNumber) public {
+        emit ShowRandomNumber(_sequence, generatedNumber);
+    }
+}
+
+
+
+var Oracle = artifacts.require("./Oracle.sol")
+
+module.exports = function(deployer) {
+    deployer.deploy(Oracle)
+}
+
+
+
+truffle deploy --network ropsten --reset
+
+
+
+const Web3 = require('web3')
+const fs = require('fs')
+const path = require('path')
+const infura = 'wss://ropsten.infura.io/ws/v3/f7b2c280f3f440728c2b5458b41c663d'
+let contractAddress
+let contractInstance
+let web3
+let privateKey
+let myAddress
+
+
+
+// To generate the private key and address needed to sign transactions
+function generateAddressesFromSeed(seed) {
+    let bip39 = require("bip39");
+    let hdkey = require('ethereumjs-wallet/hdkey');
+    let hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seed));
+    let wallet_hdpath = "m/44'/60'/0'/0/0";
+    let wallet = hdwallet.derivePath(wallet_hdpath).getWallet();
+    let address = '0x' + wallet.getAddress().toString("hex");
+    let myPrivateKey = wallet.getPrivateKey().toString("hex");
+    myAddress = address
+    privateKey = '0x' + myPrivateKey
+}
+
+
+
+npm i -S bip39 ethereumjs-wallet web3
+
+
+
+// Setup web3 and start listening to events
+function start() {
+    const mnemonic = fs.readFileSync(".secret").toString().trim()
+    generateAddressesFromSeed(mnemonic)
+
+    // Note that we use the WebsocketProvider because the previous HttpProvider is outdated and doesn't allow subscriptions
+    web3 = new Web3(new Web3.providers.WebsocketProvider(infura))
+    const ABI = JSON.parse(fs.readFileSync(path.join(__dirname, 'build', 'contracts', 'Oracle.json')))
+    contractAddress = ABI.networks['3'].address
+    contractInstance = new web3.eth.Contract(ABI.abi, contractAddress)
+
+    console.log('Listening to events...')
+
+    // Listen to the generate random event for executing the __callback() function
+    const subscription = contractInstance.events.GenerateRandom()
+    subscription.on('data', newEvent => {
+        callback(newEvent.returnValues.sequence)
+    })
+}
+
+
+
+
+// To generate random numbers between 1 and 100 and execute the __callback function from the smart contract
+function callback(sequence) {
+    const generatedNumber = Math.floor(Math.random() * 100 + 1)
+
+    const encodedCallback = contractInstance.methods.__callback(sequence, generatedNumber).encodeABI()
+    const tx = {
+        from: myAddress,
+        gas: 6e6,
+        gasPrice: 5,
+        to: contractAddress,
+        data: encodedCallback,
+        chainId: 3
+    }
+
+    web3.eth.accounts.signTransaction(tx, privateKey).then(signed => {
+        console.log('Generating transaction...')
+        web3.eth.sendSignedTransaction(signed.rawTransaction)
+            .on('receipt', result => {
+                console.log('Callback transaction confirmed!')
+            })
+            .catch(error => console.log(error))
+    })
+}
+
+
+
+const Web3 = require('web3')
+const fs = require('fs')
+const path = require('path')
+const infura = 'wss://ropsten.infura.io/ws/v3/f7b2c280f3f440728c2b5458b41c663d'
+let contractAddress
+let contractInstance
+let web3
+let privateKey
+let myAddress
+
+// To generate the private key and address needed to sign transactions
+function generateAddressesFromSeed(seed) {
+    let bip39 = require("bip39");
+    let hdkey = require('ethereumjs-wallet/hdkey');
+    let hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seed));
+    let wallet_hdpath = "m/44'/60'/0'/0/0";
+    let wallet = hdwallet.derivePath(wallet_hdpath).getWallet();
+    let address = '0x' + wallet.getAddress().toString("hex");
+    let myPrivateKey = wallet.getPrivateKey().toString("hex");
+    myAddress = address
+    privateKey = '0x' + myPrivateKey
+}
+
+// Setup web3 and start listening to events
+function start() {
+    const mnemonic = fs.readFileSync(".secret").toString().trim()
+    generateAddressesFromSeed(mnemonic)
+
+    // Note that we use the WebsocketProvider because the previous HttpProvider is outdated and doesn't allow subscriptions
+    web3 = new Web3(new Web3.providers.WebsocketProvider(infura))
+    const ABI = JSON.parse(fs.readFileSync(path.join(__dirname, 'build', 'contracts', 'Oracle.json')))
+    contractAddress = ABI.networks['3'].address
+    contractInstance = new web3.eth.Contract(ABI.abi, contractAddress)
+
+    console.log('Listening to events...')
+
+    // Listen to the generate random event for executing the __callback() function
+    const subscription = contractInstance.events.GenerateRandom()
+    subscription.on('data', newEvent => {
+        callback(newEvent.returnValues.sequence)
+    })
+}
+
+// To generate random numbers between 1 and 100 and execute the __callback function from the smart contract
+function callback(sequence) {
+    const generatedNumber = Math.floor(Math.random() * 100 + 1)
+
+    const encodedCallback = contractInstance.methods.__callback(sequence, generatedNumber).encodeABI()
+    const tx = {
+        from: myAddress,
+        gas: 6e6,
+        gasPrice: 5,
+        to: contractAddress,
+        data: encodedCallback,
+        chainId: 3
+    }
+
+    web3.eth.accounts.signTransaction(tx, privateKey).then(signed => {
+        console.log('Generating transaction...')
+        web3.eth.sendSignedTransaction(signed.rawTransaction)
+            .on('receipt', result => {
+                console.log('Callback transaction confirmed!')
+            })
+            .catch(error => console.log(error))
+    })
+}
+
+start()
+
+
+
+
+// To send a transaction to run the generateRandom function
+function generateRandom() {
+    const encodedGenerateRandom = contractInstance.methods.generateRandom().encodeABI()
+    const tx = {
+        from: myAddress,
+        gas: 6e6,
+        gasPrice: 5,
+        to: contractAddress,
+        data: encodedGenerateRandom,
+        chainId: 3
+    }
+
+    web3.eth.accounts.signTransaction(tx, privateKey).then(signed => {
+        console.log('Generating transaction...')
+        web3.eth.sendSignedTransaction(signed.rawTransaction)
+            .on('receipt', result => {
+                console.log('Generate random transaction confirmed!')
+            })
+            .catch(error => console.log(error))
+    })
+}
+
+// Setup web3 and start listening to events
+function start() {
+    const mnemonic = fs.readFileSync(".secret").toString().trim()
+    generateAddressesFromSeed(mnemonic)
+
+    // Note that we use the WebsocketProvider because the previous HttpProvider is outdated and doesn't allow subscriptions
+    web3 = new Web3(new Web3.providers.WebsocketProvider(infura))
+    const ABI = JSON.parse(fs.readFileSync(path.join(__dirname, 'build', 'contracts', 'Oracle.json')))
+    contractAddress = ABI.networks['3'].address
+    contractInstance = new web3.eth.Contract(ABI.abi, contractAddress)
+
+    console.log('Listening to events...')
+    // Listen to the generate random event for executing the __callback() function
+    const subscription = contractInstance.events.GenerateRandom()
+    subscription.on('data', newEvent => {
+        callback(newEvent.returnValues.sequence)
+    })
+
+    // Listen to the ShowRandomNumber() event that gets emmited after the callback
+    const subscription2 = contractInstance.events.ShowRandomNumber()
+    subscription2.on('data', newEvent => {
+        console.log('Received random number! Sequence:', newEvent.returnValues.sequence, 'Randomly generated number:', newEvent.returnValues.number)
+    })
+}
+
+
+
+
+constructor(address _identityRegistryAddress, address _tokenAddress) public {
+    require(_identityRegistryAddress != address(0), 'The identity registry address is required');
+    require(_tokenAddress != address(0), 'You must setup the token rinkeby address');
+    hydroToken = HydroTokenTestnetInterface(_tokenAddress);
+    identityRegistry = IdentityRegistryInterface(_identityRegistryAddress);
+    // TODO Uncomment this when the contract is completed
+    /* oraclize_setProof(proofType_Ledger); */
+}

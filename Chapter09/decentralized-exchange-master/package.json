@@ -1,0 +1,34 @@
+{
+  "name": "decentralized-exchange",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "http-server dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "^2.1.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "style-loader": "^0.23.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "truffle-hdwallet-provider": "^1.0.5",
+    "web3": "^1.0.0-beta.37",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}

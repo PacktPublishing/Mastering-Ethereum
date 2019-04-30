@@ -1,0 +1,5 @@
+npm i -S openzeppelin-solidity
+
+
+
+import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Full.sol';

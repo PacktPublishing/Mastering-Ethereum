@@ -1,0 +1,30 @@
+brew update
+brew install ethereum
+brew upgrade ethereum
+
+
+geth account new
+geth account list
+geth account update <your-accounts-address>
+geth --unlock <your-accounts-address> --password <your-password>
+geth
+geth --datadir "<your-location>"
+geth --cache=1024
+geth monitor
+geth --mine
+geth --etherbase 0
+bash <(curl https://get.parity.io -L)
+parity
+parity --author <your-ethereum-address-without-0x>
+brew install Ethereum
+geth –-datadir .ethereum/ account new
+puppeth
+geth --datadir .ethereum/ init <your-genesis-file-location>.json
+geth --nodiscover --datadir .ethereum/ --unlock 0x<YOUR-ETHEREUM-ADDRESS> --mine --rpc --rpcapi eth,net,web3 --rpccorsdomain https://remix.ethereum.org
+geth --nodiscover --networkid 77 --datadir .ethereum/ --unlock 0xf30c37b1e5ed82eebd1a7cf4c66cb9497faa4799 --mine --rpc --rpcapi eth,net,web3 --rpccorsdomain https://remix.ethereum.org
+geth account new
+geth init <your-genesis-file-location>.json
+geth init 'C:\Users\merun\Desktop\puppeth blockchains\merunas.json'
+geth removedb
+geth --networkid 100 --unlock 0x<YOUR-ETHEREUM-ADDRESS> --mine
+geth --nodiscover --networkid 77 --datadir .ethereum/ --unlock 0xf30c37b1e5ed82eebd1a7cf4c66cb9497faa4799 --mine --rpc --rpcapi eth,net,web3 --rpccorsdomain https://remix.ethereum.org

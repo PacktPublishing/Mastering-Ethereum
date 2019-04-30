@@ -1,0 +1,227 @@
+productPadding = 20px
+
+body
+    background-color: whitesmoke
+    font-family: sans-serif
+    margin: 0
+
+button
+    border: none
+    background-color: black
+    color: white
+    cursor: pointer
+    width: 200px
+    height: 50px
+
+    &:hover
+        opacity: 0.9
+
+input, textarea
+    padding: 20px
+    border: 1px solid black
+
+.header
+    background-color: black
+    color: white
+    padding: 15px
+    margin-bottom: 20px
+    text-align: center
+    display: flex
+    justify-content: space-around
+
+    a
+        color: white
+        text-decoration: none
+        margin-right: 10px
+
+        &:hover
+            color: lightgrey
+
+.products-container
+    display: grid
+    width: 80%
+    margin: auto
+    grid-template-columns: 1fr 1fr 1fr
+    justify-items: center
+    margin-top: 50px
+    align-items: start
+
+    .product
+        width: 400px
+        border: 1px solid black
+
+        .product-image
+            width: 100%
+            grid-column: 1 / 3
+            box-shadow: 0 3px 0px 0 lightgrey
+
+        .product-data
+            display: grid
+            grid-template-columns: 1fr 1fr
+            grid-template-rows: 50px 20px 40px
+            align-items: center
+            padding: 10px productPadding
+            grid-column-gap: productPadding
+            background-color: white
+
+            .product-description
+                font-size: 10pt
+
+            .product-price
+                font-size: 11pt
+
+            .product-view
+                width: 170px
+                grid-column: 2 / 3
+                margin-top: 100px
+                height: 50px
+
+.product-details
+    display: grid
+    width: 70%
+    margin: auto
+    grid-template-columns: 70% 30%
+    grid-template-rows: 1fr
+    margin-bottom: 50px
+    grid-column-gap: 40px
+
+    .product-image
+        grid-column: 1 / 2
+        justify-self: center
+        max-width: 100%
+
+    .product-title, .product-description, .product-price, .product-buy
+        grid-column: 2 / 3
+
+    .product-description
+        white-space: pre-wrap
+        line-height: 20pt
+
+    .product-data-container
+        display: flex
+        justify-content: space-between
+        margin-bottom: 20px
+
+.product-buy-page
+    display: grid
+    margin: auto
+    width: 50%
+    padding: 20px
+    padding-top: 0
+    grid-template-columns: 50% 50%
+    grid-template-rows: auto 1fr
+    margin-bottom: 50px
+    grid-column-gap: 40px
+    border: 1px solid black
+    background-color: white
+
+    .title
+        grid-column: 1 / 3
+        justify-self: center
+
+    .product-image
+        grid-column: 1 / 2
+        height: 150px
+        justify-self: end
+
+    .product-title
+        margin-bottom: 25px
+
+    .product-price
+        font-size: 15pt
+        font-weight: bold
+
+.shipping-buy-page
+    display: grid
+    flex-direction: column
+    justify-items: center
+    width: 50%
+    margin: auto
+    margin-bottom: 200px
+
+    input
+        margin-bottom: 10px
+        width: 100%
+
+.spacer
+    height: 200px
+    width: 100%
+
+.sell-page
+    display: grid
+    flex-direction: column
+    justify-items: center
+    width: 50%
+    margin: auto
+    margin-bottom: 200px
+
+    input, textarea
+        width: 100%
+        margin-bottom: 10px
+
+.orders-page
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    width: 70%
+    margin: auto
+
+    >div:last-child
+        margin-bottom: 100px
+
+    .completed-orders-container
+        grid-column: 1 / 3
+
+    .order-title
+        text-align: center
+        font-size: 12pt
+
+    .product
+        display: grid
+        margin-bottom: 20px
+        grid-template-columns: 1fr 1fr
+        grid-gap: 15px
+
+        .small-product-title
+            margin-bottom: 20px
+            margin-top: 0
+
+        .product-image
+            height: 150px
+            justify-self: right
+
+        .product-title
+            margin-top: 0
+            margin-bottom: 25px
+
+        .small-view-button
+            height: 25px
+            background-color: transparent
+            color: black
+            border: 1px solid black
+            margin-bottom: 5px
+
+        .small-completed-button
+            height: 25px
+
+        .order-address
+            grid-column: 1 / 3
+            display: grid
+            grid-template-columns: repeat(2, 50%)
+            grid-column-gap: 15px
+
+            div
+                grid-column: 1 / 2
+                text-align: right
+                text-overflow: ellipsis
+                white-space: nowrap
+                overflow: hidden
+
+            div.second-column
+                grid-column: 2 / 3
+                text-align: left
+
+        &:last-child
+            margin-bottom: 40px
+
+.center
+    text-align: center

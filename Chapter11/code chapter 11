@@ -1,0 +1,1353 @@
+git clone https://github.com/merlox/dapp
+mv dapp/ social-media-dapp/
+git config remote.origin.url https://<YOUR-USERNAME>:<YOUR-PASSWORD>@github.com/<YOUR-USERNAME>/social-media-dapp
+npm i -S style-loader css-loader
+
+
+{
+    test: /\.css$/,
+    exclude: /node_modules/,
+    use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader' }
+    ]
+}
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+
+class Main extends React.Component {
+    constructor() {
+        super()
+
+        this.state = {
+            content: [{
+                author: '0x211824098yf7320417812j1002341342342341234',
+                message: 'This is a test',
+                hashtags: ['test', 'dapp', 'blockchain'],
+                time: new Date().toLocaleDateString(),
+            }, {
+                author: '0x211824098yf7320417812j1002341342342341234',
+                message: 'This is another test',
+                hashtags: ['sample', 'dapp', 'Ethereum'],
+                time: new Date().toLocaleDateString(),
+            }],
+            topHashtags: ['dapp', 'Ethereum', 'blockchain', 'technology', 'design'],
+            followedHashtags: ['electronics', 'design', 'robots', 'futurology', 'manufacturing'],
+            displaySubscribe: false,
+            displaySubscribeId: '',
+        }
+    }
+
+    render() {
+        return (
+            <div className="main-container">
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<Main />, document.querySelector('#root'))
+
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+
+class Main extends React.Component {
+    constructor() {
+        super()
+
+        this.state = {
+            content: [{
+                author: '0x211824098yf7320417812j1002341342342341234',
+                message: 'This is a test',
+                hashtags: ['test', 'dapp', 'blockchain'],
+                time: new Date().toLocaleDateString(),
+            }, {
+                author: '0x211824098yf7320417812j1002341342342341234',
+                message: 'This is another test',
+                hashtags: ['sample', 'dapp', 'Ethereum'],
+                time: new Date().toLocaleDateString(),
+            }],
+            topHashtags: ['dapp', 'Ethereum', 'blockchain', 'technology', 'design'],
+            followedHashtags: ['electronics', 'design', 'robots', 'futurology', 'manufacturing'],
+            displaySubscribe: false,
+            displaySubscribeId: '',
+        }
+    }
+
+    generateHashtags(hashtag, index) {
+        let timeout
+        return (
+            <span onMouseEnter={() => {
+                clearTimeout(timeout)
+                this.setState({
+                    displaySubscribe: true,
+                    displaySubscribeId: `subscribe-${hashtag}-${index}`,
+                })
+            }} onMouseLeave={() => {
+                timeout = setTimeout(() => {
+                    this.setState({
+                        displaySubscribe: false,
+                        displaySubscribeId: '',
+                    })
+                }, 2e3)
+            }}>
+                <a className="hashtag" href="#">#{hashtag}</a>
+                <span className="spacer"></span>
+                <button ref={`subscribe-${hashtag}-${index}`} className={this.state.displaySubscribe && this.state.displaySubscribeId == `subscribe-${hashtag}-${index}` ? '' : 'hidden'} type="button">Subscribe</button>
+                <span className="spacer"></span>
+            </span>
+        )
+    }
+
+    render() {
+        let contentBlock = this.state.content.map((element, index) => (
+            <div key={index} className="content">
+                <div className="content-address">{element.author}</div>
+                <div className="content-message">{element.message}</div>
+                <div className="content-hashtags">{element.hashtags.map((hashtag, i) => (
+                    <span key={i}>
+                        {this.generateHashtags(hashtag, index)}
+                    </span>
+                ))}
+                </div>
+                <div className="content-time">{element.time}</div>
+            </div>
+        ))
+        let hashtagBlock = this.state.topHashtags.map((hashtag, index) => (
+            <div key={index}>
+                {this.generateHashtags(hashtag, index)}
+            </div>
+        ))
+        let followedHashtags = this.state.followedHashtags.map((hashtag, index) => (
+            <div key={index}>
+                {this.generateHashtags(hashtag, index)}
+            </div>
+        ))
+        return (
+            <div className="main-container">
+                <div className="hashtag-block">
+                    <h3>Top hashtags</h3>
+                    <div className="hashtag-container">{hashtagBlock}</div>
+                    <h3>Followed hashtags</h3>
+                    <div className="hashtag-container">{followedHashtags}</div>
+                </div>
+                <div className="content-block">
+                    <div className="input-container">
+                        <textarea placeholder="Publish content..."></textarea>
+                        <input type="text" placeholder="Hashtags separated by commas..."/>
+                        <button type="button">Publish</button>
+                    </div>
+
+                    <div className="content-container">
+                        {contentBlock}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+
+
+body {
+    margin: 0;
+    background-color: whitesmoke;
+    font-family: sans-serif;
+}
+
+button {
+    background-color: rgb(201, 47, 47);
+    color: white;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(131, 0, 0);
+}
+
+.hidden {
+    display: none;
+}
+
+.spacer {
+    margin-right: 5px;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin: auto;
+    width: 50%;
+    grid-column-gap: 10px;
+}
+
+.input-container {
+    margin-bottom: 10px;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 80% 1fr;
+    grid-template-rows: 70% 30%;
+    grid-gap: 10px;
+}
+
+.input-container textarea {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 11pt;
+    font-family: sans-serif;
+    border: 1px solid grey;
+    grid-column: 1 / 3;
+}
+
+.input-container input {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 11pt;
+    font-family: sans-serif;
+    border: 1px solid grey;
+}
+
+.content {
+    background-color: white;
+    border: 1px solid grey;
+    margin-bottom: 10px;
+    padding: 30px;
+    box-shadow: 4px 4px 0px 0 #cecece;
+}
+
+.content-address {
+    color: grey;
+    margin-bottom: 5px;
+}
+
+.content-message {
+    font-size: 16pt;
+    margin-bottom: 5px;
+}
+
+.content-hashtags {
+    margin-bottom: 5px;
+}
+
+.content-time {
+    color: grey;
+    font-size: 12pt;
+}
+
+.hashtag-block {
+    text-align: center;
+}
+
+.hashtag-container {
+    line-height: 30px;
+}
+
+.hashtag {
+    font-size: 15pt;
+}
+
+
+
+// This is a social media smart contract that allows people to publish strings of text in short formats with a focus on hashtags so that they can follow, read and be in touch with the latest content regarding those hashtags. There will be a mapping of the top hashtags. A struct for each piece of content with the date, author, content and array of hashtags. We want to avoid focusing on specific users that's why user accounts will be anonymous where addresses will the be the only identifiers.
+
+pragma solidity ^0.5.5;
+
+contract SocialMedia {}
+
+
+
+// This is a social media smart contract that allows people to publish strings of text in short formats with a focus on hashtags so that they can follow, read and be in touch with the latest content regarding those hashtags. There will be a mapping os top hashtags. A struct for each piece of content with the date, author, content and array of hashtags. We want to avoid focusing on specific users that's why user accounts will be anonymous where addresses will the be the only identifiers.
+
+pragma solidity ^0.5.5;
+
+contract SocialMedia {
+    struct Content {
+        uint256 id;
+        address author;
+        uint256 date;
+        string content;
+        bytes32[] hashtags;
+    }
+
+    event ContentAdded(uint256 indexed id, address indexed author, uint256 indexed date, string content, bytes32[] hashtags);
+
+    mapping(address => bytes32[]) public subscribedHashtags;
+    mapping(bytes32 => uint256) public hashtagScore; // The number of times this hashtag has been used, used to sort the top hashtags
+    mapping(bytes32 => Content[]) public contentByHashtag;
+    mapping(uint256 => Content) public contentById;
+    mapping(bytes32 => bool) public doesHashtagExist;
+    mapping(address => bool) public doesUserExist;
+    address[] public users;
+    Content[] public contents;
+    bytes32[] public hashtags;
+    uint256 public latestContentId;
+
+    function addContent(string memory _content, bytes32[] memory _hashtags) public {}
+
+    function subscribeToHashtag(bytes32 _hashtag) public {}
+
+    function unsubscribeToHashtag(bytes32 _hashtag) public {}
+
+    function getTopHashtags(uint256 _amount) public view returns(bytes32[] memory) {}
+
+    function getFollowedHashtags() public view returns(bytes32[] memory) {}
+
+    function getContentIdsByHashtag(bytes32 _hashtag, uint256 _amount) public view returns(uint256[] memory) {}
+
+    function getContentById(uint256 _id) public view returns(uint256, address, uint256, string memory, bytes32[] memory) {}
+
+    function sortHashtagsByScore() public view returns(bytes32[] memory) {}
+
+    function checkExistingSubscription(bytes32 _hashtag) public view returns(bool) {}
+}
+
+
+
+// This is a social media smart contract that allows people to publish strings of text in short formats with a focus on hashtags so that they can follow, read and be in touch with the latest content regarding those hashtags. There will be a mapping os top hashtags. A struct for each piece of content with the date, author, content and array of hashtags. We want to avoid focusing on specific users that's why user accounts will be anonymous where addresses will the be the only identifiers.
+
+pragma solidity ^0.5.5;
+
+contract SocialMedia {
+    struct Content {
+        uint256 id;
+        address author;
+        uint256 date;
+        string content;
+        bytes32[] hashtags;
+    }
+
+    event ContentAdded(uint256 indexed id, address indexed author, uint256 indexed date, string content, bytes32[] hashtags);
+
+    mapping(address => bytes32[]) public subscribedHashtags;
+    mapping(bytes32 => uint256) public hashtagScore; // The number of times this hashtag has been used, used to sort the top hashtags
+    mapping(bytes32 => Content[]) public contentByHashtag;
+    mapping(uint256 => Content) public contentById;
+    mapping(bytes32 => bool) public doesHashtagExist;
+    mapping(address => bool) public doesUserExist;
+    address[] public users;
+    Content[] public contents;
+    bytes32[] public hashtags;
+    uint256 public latestContentId;
+
+    /// @notice To add new content to the social media dApp. If no hashtags are sent, the content is added to the #general hashtag list.
+    /// @param _content The string of content
+    /// @param _hashtags The hashtags used for that piece of content
+    function addContent(string memory _content, bytes32[] memory _hashtags) public {}
+
+    /// @notice To subscribe to a hashtag if you didn't do so already
+    /// @param _hashtag The hashtag name
+    function subscribeToHashtag(bytes32 _hashtag) public {}
+
+    /// @notice To unsubscribe to a hashtag if you are subscribed otherwise it won't do nothing
+    /// @param _hashtag The hashtag name
+    function unsubscribeToHashtag(bytes32 _hashtag) public {}
+
+    /// @notice To get the top hashtags
+    /// @param _amount How many top hashtags to get in order, for instance the top 20 hashtags
+    /// @return bytes32[] Returns the names of the hashtags
+    function getTopHashtags(uint256 _amount) public view returns(bytes32[] memory) {}
+
+    /// @notice To get the followed hashtag names for this msg.sender
+    /// @return bytes32[] The hashtags followed by this user
+    function getFollowedHashtags() public view returns(bytes32[] memory) {}
+
+    /// @notice To get the contents for a particular hashtag. It returns the ids because we can't return arrays of strings and we can't return structs so the user has to manually make a new request for each piece of content using the function below.
+    /// @param _hashtag The hashtag from which get content
+    /// @param _amount The quantity of contents to get for instance, 50 pieces of content for that hashtag
+    /// @return uint256[] Returns the ids of the contents so that you can get each piece independently with a new request since you can't return arrays of strings
+    function getContentIdsByHashtag(bytes32 _hashtag, uint256 _amount) public view returns(uint256[] memory) {}
+
+    /// @notice Returns the data for a particular content id
+    /// @param _id The id of the content
+    /// @return Returns the id, author, date, content and hashtags for that piece of content
+    function getContentById(uint256 _id) public view returns(uint256, address, uint256, string memory, bytes32[] memory) {}
+
+    /// @notice Sorts the hashtags given their hashtag score
+    /// @return bytes32[] Returns the sorted array of hashtags
+    function sortHashtagsByScore() public view returns(bytes32[] memory) {}
+
+    /// @notice To check if the use is already subscribed to a hashtag
+    /// @return bool If you are subscribed to that hashtag or not
+    function checkExistingSubscription(bytes32 _hashtag) public view returns(bool) {}
+}
+
+
+
+
+/// @notice To add new content to the social media dApp. If no hashtags are sent, the content is added to the #general hashtag list.
+/// @param _content The string of content
+/// @param _hashtags The hashtags used for that piece of content
+function addContent(string memory _content, bytes32[] memory _hashtags) public {
+    require(bytes(_content).length > 0, 'The content cannot be empty');
+    Content memory newContent = Content(latestContentId, msg.sender, now, _content, _hashtags);
+    // If the user didn't specify any hashtags add the content to the #general hashtag
+    if(_hashtags.length == 0) {
+        contentByHashtag['general'].push(newContent);
+        hashtagScore['general']++;
+        if(!doesHashtagExist['general']) {
+            hashtags.push('general');
+            doesHashtagExist['general'] = true;
+        }
+    } else {
+        for(uint256 i = 0; i < _hashtags.length; i++) {
+            contentByHashtag[_hashtags[i]].push(newContent);
+            hashtagScore[_hashtags[i]]++;
+            if(!doesHashtagExist[_hashtags[i]]) {
+                hashtags.push(_hashtags[i]);
+                doesHashtagExist[_hashtags[i]] = true;
+            }
+        }
+    }
+    hashtags = sortHashtagsByScore();
+    contentById[latestContentId] = newContent;
+    contents.push(newContent);
+    if(!doesUserExist[msg.sender]) {
+        users.push(msg.sender);
+        doesUserExist[msg.sender] = true;
+    }
+    emit ContentAdded(latestContentId, msg.sender, now, _content, _hashtags);
+    latestContentId++;
+}
+
+
+
+/// @notice To subscribe to a hashtag if you didn't do so already
+/// @param _hashtag The hashtag name
+function subscribeToHashtag(bytes32 _hashtag) public {
+    if(!checkExistingSubscription(_hashtag)) {
+        subscribedHashtags[msg.sender].push(_hashtag);
+        hashtagScore[_hashtag]++;
+        hashtags = sortHashtagsByScore();
+    }
+}
+
+/// @notice To unsubscribe to a hashtag if you are subscribed otherwise it won't do nothing
+/// @param _hashtag The hashtag name
+function unsubscribeToHashtag(bytes32 _hashtag) public {
+    if(checkExistingSubscription(_hashtag)) {
+        for(uint256 i = 0; i < subscribedHashtags[msg.sender].length; i++) {
+            if(subscribedHashtags[msg.sender][i] == _hashtag) {
+                delete subscribedHashtags[msg.sender][i];
+                hashtagScore[_hashtag]--;
+                hashtags = sortHashtagsByScore();
+                break;
+            }
+        }
+    }
+}
+
+
+
+/// @notice To get the top hashtags
+/// @param _amount How many top hashtags to get in order, for instance the top 20 hashtags
+/// @return bytes32[] Returns the names of the hashtags
+function getTopHashtags(uint256 _amount) public view returns(bytes32[] memory) {
+    bytes32[] memory result;
+    if(hashtags.length < _amount) {
+        result = new bytes32[](hashtags.length);
+        for(uint256 i = 0; i < hashtags.length; i++) {
+            result[i] = hashtags[i];
+        }
+    } else {
+        result = new bytes32[](_amount);
+        for(uint256 i = 0; i < _amount; i++) {
+            result[i] = hashtags[i];
+        }
+    }
+    return result;
+}
+
+/// @notice To get the followed hashtag names for this msg.sender
+/// @return bytes32[] The hashtags followed by this user
+function getFollowedHashtags() public view returns(bytes32[] memory) {
+    return subscribedHashtags[msg.sender];
+}
+
+/// @notice To get the contents for a particular hashtag. It returns the ids because we can't return arrays of strings and we can't return structs so the user has to manually make a new request for each piece of content using the function below.
+/// @param _hashtag The hashtag from which get content
+/// @param _amount The quantity of contents to get for instance, 50 pieces of content for that hashtag
+/// @return uint256[] Returns the ids of the contents so that you can get each piece independently with a new request since you can't return arrays of strings
+function getContentIdsByHashtag(bytes32 _hashtag, uint256 _amount) public view returns(uint256[] memory) {
+    uint256[] memory ids = new uint256[](_amount);
+    for(uint256 i = 0; i < _amount; i++) {
+        ids[i] = contentByHashtag[_hashtag][i].id;
+    }
+    return ids;
+}
+
+/// @notice Returns the data for a particular content id
+/// @param _id The id of the content
+/// @return Returns the id, author, date, content and hashtags for that piece of content
+function getContentById(uint256 _id) public view returns(uint256, address, uint256, string memory, bytes32[] memory) {
+    Content memory c = contentById[_id];
+    return (c.id, c.author, c.date, c.content, c.hashtags);
+}
+
+
+
+/// @notice Sorts the hashtags given their hashtag score
+/// @return bytes32[] Returns the sorted array of hashtags
+function sortHashtagsByScore() public view returns(bytes32[] memory) {
+    bytes32[] memory _hashtags = hashtags;
+    bytes32[] memory sortedHashtags = new bytes32[](hashtags.length);
+    uint256 lastId = 0;
+    for(uint256 i = 0; i < _hashtags.length; i++) {
+        for(uint j = i+1; j < _hashtags.length; j++) {
+            // If it's a buy order, sort from lowest to highest since we want the lowest prices first
+            if(hashtagScore[_hashtags[i]] < hashtagScore[_hashtags[j]]) {
+                bytes32 temporaryhashtag = _hashtags[i];
+                _hashtags[i] = _hashtags[j];
+                _hashtags[j] = temporaryhashtag;
+            }
+        }
+        sortedHashtags[lastId] = _hashtags[i];
+        lastId++;
+    }
+    return sortedHashtags;
+}
+
+/// @notice To check if the use is already subscribed to a hashtag
+/// @return bool If you are subscribed to that hashtag or not
+function checkExistingSubscription(bytes32 _hashtag) public view returns(bool) {
+    for(uint256 i = 0; i < subscribedHashtags[msg.sender].length; i++) {
+        if(subscribedHashtags[msg.sender][i] == _hashtag) return true;
+    }
+    return false;
+}
+
+
+
+// This is a social media smart contract that allows people to publish strings of text in short formats with a focus on hashtags so that they can follow, read and be in touch with the latest content regarding those hashtags. There will be a mapping os top hashtags. A struct for each piece of content with the date, author, content and array of hashtags. We want to avoid focusing on specific users that's why user accounts will be anonymous where addresses will the be the only identifiers.
+
+pragma solidity ^0.5.5;
+
+contract SocialMedia {
+    struct Content {
+        uint256 id;
+        address author;
+        uint256 date;
+        string content;
+        bytes32[] hashtags;
+    }
+
+    event ContentAdded(uint256 indexed id, address indexed author, uint256 indexed date, string content, bytes32[] hashtags);
+
+    mapping(address => bytes32[]) public subscribedHashtags;
+    mapping(bytes32 => uint256) public hashtagScore; // The number of times this hashtag has been used, used to sort the top hashtags
+    mapping(bytes32 => Content[]) public contentByHashtag;
+    mapping(uint256 => Content) public contentById;
+    mapping(bytes32 => bool) public doesHashtagExist;
+    mapping(address => bool) public doesUserExist;
+    address[] public users;
+    Content[] public contents;
+    bytes32[] public hashtags;
+    uint256 public latestContentId;
+
+    /// @notice To add new content to the social media dApp. If no hashtags are sent, the content is added to the #general hashtag list.
+    /// @param _content The string of content
+    /// @param _hashtags The hashtags used for that piece of content
+    function addContent(string memory _content, bytes32[] memory _hashtags) public {
+        require(bytes(_content).length > 0, 'The content cannot be empty');
+        Content memory newContent = Content(latestContentId, msg.sender, now, _content, _hashtags);
+        // If the user didn't specify any hashtags add the content to the #general hashtag
+        if(_hashtags.length == 0) {
+            contentByHashtag['general'].push(newContent);
+            hashtagScore['general']++;
+            if(!doesHashtagExist['general']) {
+                hashtags.push('general');
+                doesHashtagExist['general'] = true;
+            }
+        } else {
+            for(uint256 i = 0; i < _hashtags.length; i++) {
+                contentByHashtag[_hashtags[i]].push(newContent);
+                hashtagScore[_hashtags[i]]++;
+                if(!doesHashtagExist[_hashtags[i]]) {
+                    hashtags.push(_hashtags[i]);
+                    doesHashtagExist[_hashtags[i]] = true;
+                }
+            }
+        }
+        hashtags = sortHashtagsByScore();
+        contentById[latestContentId] = newContent;
+        contents.push(newContent);
+        if(!doesUserExist[msg.sender]) {
+            users.push(msg.sender);
+            doesUserExist[msg.sender] = true;
+        }
+        emit ContentAdded(latestContentId, msg.sender, now, _content, _hashtags);
+        latestContentId++;
+    }
+
+    /// @notice To subscribe to a hashtag if you didn't do so already
+    /// @param _hashtag The hashtag name
+    function subscribeToHashtag(bytes32 _hashtag) public {
+        if(!checkExistingSubscription(_hashtag)) {
+            subscribedHashtags[msg.sender].push(_hashtag);
+            hashtagScore[_hashtag]++;
+            hashtags = sortHashtagsByScore();
+        }
+    }
+
+    /// @notice To unsubscribe to a hashtag if you are subscribed otherwise it won't do nothing
+    /// @param _hashtag The hashtag name
+    function unsubscribeToHashtag(bytes32 _hashtag) public {
+        if(checkExistingSubscription(_hashtag)) {
+            for(uint256 i = 0; i < subscribedHashtags[msg.sender].length; i++) {
+                if(subscribedHashtags[msg.sender][i] == _hashtag) {
+                    delete subscribedHashtags[msg.sender][i];
+                    hashtagScore[_hashtag]--;
+                    hashtags = sortHashtagsByScore();
+                    break;
+                }
+            }
+        }
+    }
+
+    /// @notice To get the top hashtags
+    /// @param _amount How many top hashtags to get in order, for instance the top 20 hashtags
+    /// @return bytes32[] Returns the names of the hashtags
+    function getTopHashtags(uint256 _amount) public view returns(bytes32[] memory) {
+        bytes32[] memory result;
+        if(hashtags.length < _amount) {
+            result = new bytes32[](hashtags.length);
+            for(uint256 i = 0; i < hashtags.length; i++) {
+                result[i] = hashtags[i];
+            }
+        } else {
+            result = new bytes32[](_amount);
+            for(uint256 i = 0; i < _amount; i++) {
+                result[i] = hashtags[i];
+            }
+        }
+        return result;
+    }
+
+    /// @notice To get the followed hashtag names for this msg.sender
+    /// @return bytes32[] The hashtags followed by this user
+    function getFollowedHashtags() public view returns(bytes32[] memory) {
+        return subscribedHashtags[msg.sender];
+    }
+
+    /// @notice To get the contents for a particular hashtag. It returns the ids because we can't return arrays of strings and we can't return structs so the user has to manually make a new request for each piece of content using the function below.
+    /// @param _hashtag The hashtag from which get content
+    /// @param _amount The quantity of contents to get for instance, 50 pieces of content for that hashtag
+    /// @return uint256[] Returns the ids of the contents so that you can get each piece independently with a new request since you can't return arrays of strings
+    function getContentIdsByHashtag(bytes32 _hashtag, uint256 _amount) public view returns(uint256[] memory) {
+        uint256[] memory ids = new uint256[](_amount);
+        for(uint256 i = 0; i < _amount; i++) {
+            ids[i] = contentByHashtag[_hashtag][i].id;
+        }
+        return ids;
+    }
+
+    /// @notice Returns the data for a particular content id
+    /// @param _id The id of the content
+    /// @return Returns the id, author, date, content and hashtags for that piece of content
+    function getContentById(uint256 _id) public view returns(uint256, address, uint256, string memory, bytes32[] memory) {
+        Content memory c = contentById[_id];
+        return (c.id, c.author, c.date, c.content, c.hashtags);
+    }
+
+    /// @notice Sorts the hashtags given their hashtag score
+    /// @return bytes32[] Returns the sorted array of hashtags
+    function sortHashtagsByScore() public view returns(bytes32[] memory) {
+        bytes32[] memory _hashtags = hashtags;
+        bytes32[] memory sortedHashtags = new bytes32[](hashtags.length);
+        uint256 lastId = 0;
+        for(uint256 i = 0; i < _hashtags.length; i++) {
+            for(uint j = i+1; j < _hashtags.length; j++) {
+                // If it's a buy order, sort from lowest to highest since we want the lowest prices first
+                if(hashtagScore[_hashtags[i]] < hashtagScore[_hashtags[j]]) {
+                    bytes32 temporaryhashtag = _hashtags[i];
+                    _hashtags[i] = _hashtags[j];
+                    _hashtags[j] = temporaryhashtag;
+                }
+            }
+            sortedHashtags[lastId] = _hashtags[i];
+            lastId++;
+        }
+        return sortedHashtags;
+    }
+
+    /// @notice To check if the use is already subscribed to a hashtag
+    /// @return bool If you are subscribed to that hashtag or not
+    function checkExistingSubscription(bytes32 _hashtag) public view returns(bool) {
+        for(uint256 i = 0; i < subscribedHashtags[msg.sender].length; i++) {
+            if(subscribedHashtags[msg.sender][i] == _hashtag) return true;
+        }
+        return false;
+    }
+}
+
+
+
+import Web3Js from 'web3'
+
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Web3Js from 'web3'
+import './index.css'
+
+class Main extends React.Component {
+    constructor() {
+        super()
+
+        this.state = {
+            content: [{
+                author: '0x211824098yf7320417812j1002341342342341234',
+                message: 'This is a test',
+                hashtags: ['test', 'dapp', 'blockchain'],
+                time: new Date().toLocaleDateString(),
+            }, {
+                author: '0x211824098yf7320417812j1002341342342341234',
+                message: 'This is another test',
+                hashtags: ['sample', 'dapp', 'Ethereum'],
+                time: new Date().toLocaleDateString(),
+            }],
+            topHashtags: ['dapp', 'Ethereum', 'blockchain', 'technology', 'design'],
+            followedHashtags: ['electronics', 'design', 'robots', 'futurology', 'manufacturing'],
+            displaySubscribe: false,
+            displaySubscribeId: '',
+        }
+
+        this.setup()
+    }
+
+    async setup() {
+        window.web3js = new Web3Js(ethereum)
+        try {
+            await ethereum.enable();
+        } catch (error) {
+            alert('You must approve this dApp to interact with it, reload it to approve it')
+        }
+    }
+}
+
+
+
+truffle compile
+
+truffle deploy --network ropsten --reset
+
+
+
+
+const HDWalletProvider = require('truffle-hdwallet-provider')
+const infuraKey = "https://ropsten.infura.io/v3/8e12dd4433454738a522d9ea7ffcf2cc"
+
+const fs = require('fs')
+const mnemonic = fs.readFileSync(".secret").toString().trim()
+
+module.exports = {
+  networks: {
+    ropsten: {
+      provider: () => new HDWalletProvider(mnemonic, infuraKey),
+      network_id: 3, // Ropsten's id
+      gas: 5500000, // Ropsten has a lower block limit than mainnet
+      confirmations: 2, // # of confs to wait between deployments. (default: 0)
+      timeoutBlocks: 200, // # of blocks before a deployment times out (minimum/default: 50)
+      skipDryRun: true // Skip dry run before migrations? (default: false for public nets )
+    }
+  }
+}
+
+
+
+const SocialMedia = artifacts.require("./SocialMedia.sol")
+
+module.exports = function(deployer) {
+  deployer.deploy(SocialMedia);
+}
+
+
+
+
+async setup() {
+    window.web3js = new Web3Js(ethereum)
+    try {
+        await ethereum.enable();
+    } catch (error) {
+        alert('You must approve this dApp to interact with it, reload it to approve it')
+    }
+    const user = (await web3js.eth.getAccounts())[0]
+    const contract = new web3js.eth.Contract(ABI.abi, ABI.networks['3'].address, {
+        from: user
+    })
+    await this.setState({contract, user})
+}
+
+
+
+async setup() {
+    window.web3js = new Web3Js(ethereum)
+    try {
+        await ethereum.enable();
+    } catch (error) {
+        alert('You must approve this dApp to interact with it, reload it to approve it')
+    }
+    const user = (await web3js.eth.getAccounts())[0]
+    window.contract = new web3js.eth.Contract(ABI.abi, ABI.networks['3'].address, {
+        from: user
+    })
+    await this.setState({contract, user})
+}
+
+
+
+render() {
+    return (
+        <div className="main-container">
+            <div className="hashtag-block">
+                <h3>Top hashtags</h3>
+                <div className="hashtag-container">{this.state.topHashtagBlock}</div>
+                <h3>Followed hashtags</h3>
+                <div className="hashtag-container">{this.state.followedHashtagsBlock}</div>
+            </div>
+            <div className="content-block">
+                <div className="input-container">
+                    <textarea ref="content" placeholder="Publish content..."></textarea>
+                    <input ref="hashtags" type="text" placeholder="Hashtags separated by commas without the # sign..."/>
+                    <button onClick={() => {
+                        this.publishContent(this.refs.content.value, this.refs.hashtags.value)
+                    }} type="button">Publish</button>
+                </div>
+
+                <div className="content-container">
+                    {this.state.contentsBlock}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+
+async getContent() {
+    const latestContentId = await this.state.contract.methods.latestContentId().call()
+    const amount = 10
+    const amountPerHashtag = 3
+    let contents = []
+    let counter = amount
+    // If we have subscriptions, get content for those subscriptions 3 pieces per hashtag
+    if(this.state.followedHashtags.length > 0) {
+        for(let i = 0; i < this.state.followedHashtags.length; i++) {
+            // Get 3 contents per hashtag
+            let contentIds = await this.state.contract.methods.getContentIdsByHashtag(this.bytes32(this.state.followedHashtags[i]), 3).call()
+            let counterTwo = amountPerHashtag
+            if(contentIds < amountPerHashtag) counterTwo = contentIds
+            for(let a = counterTwo - 1; a >= 0; a--) {
+                let content = await this.state.contract.methods.getContentById(i).call()
+                content = {
+                    id: content[0],
+                    author: content[1],
+                    time: new Date(parseInt(content[2] + '000')).toLocaleDateString(),
+                    message: content[3],
+                    hashtags: content[4],
+                }
+                content.message = web3js.utils.toUtf8(content.message)
+                content.hashtags = content.hashtags.map(hashtag => web3js.utils.toUtf8(hashtag))
+                contents.push(content)
+            }
+        }
+    }
+
+    // If we don't have enough content yet, show whats in there
+    if(latestContentId < amount) counter = latestContentId
+    for(let i = counter - 1; i >= 0; i--) {
+        let content = await this.state.contract.methods.getContentById(i).call()
+        content = {
+            id: content[0],
+            author: content[1],
+            time: new Date(parseInt(content[2] + '000')).toLocaleDateString(),
+            message: content[3],
+            hashtags: content[4],
+        }
+        content.message = web3js.utils.toUtf8(content.message)
+        content.hashtags = content.hashtags.map(hashtag => web3js.utils.toUtf8(hashtag))
+        contents.push(content)
+    }
+
+    let contentsBlock = await Promise.all(contents.map(async (element, index) => (
+        <div key={index} className="content">
+            <div className="content-address">{element.author}</div>
+            <div className="content-message">{element.message}</div>
+            <div className="content-hashtags">{element.hashtags.map((hashtag, i) => (
+                <span key={i}>
+                    <Hashtag
+                        hashtag={hashtag}
+                        contract={this.state.contract}
+                        subscribe={hashtag => this.subscribe(hashtag)}
+                        unsubscribe={hashtag => this.unsubscribe(hashtag)}
+                    />
+                </span>
+            ))}
+            </div>
+            <div className="content-time">{element.time}</div>
+        </div>
+    )))
+
+    this.setState({contentsBlock})
+}
+
+
+
+
+class Hashtag extends React.Component {
+    constructor(props) {
+        super()
+        this.state = {
+            displaySubscribe: false,
+            displayUnsubscribe: false,
+            checkSubscription: false,
+            isSubscribed: false,
+        }
+    }
+
+    componentDidMount() {
+        this.checkExistingSubscription()
+    }
+
+    bytes32(name) {
+        let nameHex = web3js.utils.toHex(name)
+        for(let i = nameHex.length; i < 66; i++) {
+            nameHex = nameHex + '0'
+        }
+        return nameHex
+    }
+
+    async checkExistingSubscription() {
+        const isSubscribed = await this.props.contract.methods.checkExistingSubscription(this.bytes32(this.props.hashtag)).call()
+        this.setState({isSubscribed})
+    }
+
+    render() {
+        return (
+            <span onMouseEnter={async () => {
+                if(this.state.checkSubscription) await this.checkExistingSubscription()
+                if(!this.state.isSubscribed) {
+                    this.setState({
+                        displaySubscribe: true,
+                        displayUnsubscribe: false,
+                    })
+                } else {
+                    this.setState({
+                        displaySubscribe: false,
+                        displayUnsubscribe: true,
+                    })
+                }
+            }} onMouseLeave={() => {
+                this.setState({
+                    displaySubscribe: false,
+                    displayUnsubscribe: false,
+                })
+            }}>
+                <a className="hashtag" href="#">#{this.props.hashtag}</a>
+                <span className="spacer"></span>
+                <button onClick={() => {
+                    this.props.subscribe(this.props.hashtag)
+                    this.setState({checkSubscription: true})
+                }} className={this.state.displaySubscribe ? '' : 'hidden'} type="button">Subscribe</button>
+                <button onClick={() => {
+                    this.props.unsubscribe(this.props.hashtag)
+                    this.setState({checkSubscription: true})
+                }} className={this.state.displayUnsubscribe ? '' : 'hidden'} type="button">Unsubscribe</button>
+                <span className="spacer"></span>
+            </span>
+        )
+    }
+}
+
+
+
+
+async getHashtags() {
+    let topHashtagBlock
+    let followedHashtagsBlock
+    const amount = 10
+    const topHashtags = (await contract.methods.getTopHashtags(amount).call()).map(element => web3js.utils.toUtf8(element))
+    const followedHashtags = (await this.state.contract.methods.getFollowedHashtags().call()).map(element => web3js.utils.toUtf8(element))
+    if(topHashtags.length == 0) {
+        topHashtagBlock = 'There are no hashtags yet, come back later!'
+    } else {
+        topHashtagBlock = topHashtags.map((hashtag, index) => (
+            <div key={index}>
+                <Hashtag
+                    hashtag={hashtag}
+                    contract={this.state.contract}
+                    subscribe={hashtag => this.subscribe(hashtag)}
+                    unsubscribe={hashtag => this.unsubscribe(hashtag)}
+                />
+            </div>
+        ))
+    }
+    if(followedHashtags.length == 0) {
+        followedHashtagsBlock = "You're not following any hashtags yet"
+    } else {
+        followedHashtagsBlock = followedHashtags.map((hashtag, index) => (
+            <div key={index}>
+                <Hashtag
+                    hashtag={hashtag}
+                    contract={this.state.contract}
+                    subscribe={hashtag => this.subscribe(hashtag)}
+                    unsubscribe={hashtag => this.unsubscribe(hashtag)}
+                />
+            </div>
+        ))
+    }
+    this.setState({topHashtagBlock, followedHashtagsBlock, followedHashtags})
+}
+
+
+
+bytes32(name) {
+    let nameHex = web3js.utils.toHex(name)
+    for(let i = nameHex.length; i < 66; i++) {
+        nameHex = nameHex + '0'
+    }
+    return nameHex
+}
+
+async publishContent(message, hashtags) {
+    if(message.length == 0) alert('You must write a message')
+    hashtags = hashtags.trim().replace(/#*/g, '').replace(/,+/g, ',').split(',').map(element => this.bytes32(element.trim()))
+    message = this.bytes32(message)
+    try {
+        await this.state.contract.methods.addContent(message, hashtags).send({
+            from: this.state.user,
+            gas: 8e6
+        })
+    } catch (e) {console.log('Error', e)}
+    await this.getHashtags()
+    await this.getContent()
+}
+
+
+
+
+async setup() {
+    window.web3js = new Web3Js(ethereum)
+    try {
+        await ethereum.enable();
+    } catch (error) {
+        alert('You must approve this dApp to interact with it, reload it to approve it')
+    }
+    const user = (await web3js.eth.getAccounts())[0]
+    window.contract = new web3js.eth.Contract(ABI.abi, ABI.networks['3'].address, {
+        from: user
+    })
+    await this.setState({contract, user})
+    await this.getHashtags()
+    await this.getContent()
+}
+
+
+
+
+async subscribe(hashtag) {
+    try {
+        await this.state.contract.methods.subscribeToHashtag(this.bytes32(hashtag)).send({from: this.state.user})
+    } catch(e) { console.log(e) }
+    await this.getHashtags()
+    await this.getContent()
+}
+
+async unsubscribe(hashtag) {
+    try {
+        await this.state.contract.methods.unsubscribeToHashtag(this.bytes32(hashtag)).send({from: this.state.user})
+    } catch(e) { console.log(e) }
+    await this.getHashtags()
+    await this.getContent()
+}
+
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Web3Js from 'web3'
+import ABI from '../build/contracts/SocialMedia.json'
+import './index.css'
+
+class Main extends React.Component {
+    constructor() {
+        super()
+
+        this.state = {
+            followedHashtags: [],
+            contentsBlock: 'Loading please wait...',
+            topHashtagsBlock: 'Loading please wait...',
+            followedHashtagsBlock: 'Loading please wait...',
+            displaySubscribe: false,
+            displaySubscribeId: '',
+            user: '',
+            contract: '',
+        }
+
+        this.setup()
+    }
+
+    bytes32(name) {
+        let nameHex = web3js.utils.toHex(name)
+        for(let i = nameHex.length; i < 66; i++) {
+            nameHex = nameHex + '0'
+        }
+        return nameHex
+    }
+
+    async setup() {
+        window.web3js = new Web3Js(ethereum)
+        try {
+            await ethereum.enable();
+        } catch (error) {
+            alert('You must approve this dApp to interact with it, reload it to approve it')
+        }
+        const user = (await web3js.eth.getAccounts())[0]
+        window.contract = new web3js.eth.Contract(ABI.abi, ABI.networks['3'].address, {
+            from: user
+        })
+        await this.setState({contract, user})
+        await this.getHashtags()
+        await this.getContent()
+    }
+
+    async publishContent(message, hashtags) {
+        if(message.length == 0) alert('You must write a message')
+        hashtags = hashtags.trim().replace(/#*/g, '').replace(/,+/g, ',').split(',').map(element => this.bytes32(element.trim()))
+        message = this.bytes32(message)
+        try {
+            await this.state.contract.methods.addContent(message, hashtags).send({
+                from: this.state.user,
+                gas: 8e6
+            })
+        } catch (e) {console.log('Error', e)}
+        await this.getHashtags()
+        await this.getContent()
+    }
+
+    async getHashtags() {
+        let topHashtagBlock
+        let followedHashtagsBlock
+        const amount = 10
+        const topHashtags = (await contract.methods.getTopHashtags(amount).call()).map(element => web3js.utils.toUtf8(element))
+        const followedHashtags = (await this.state.contract.methods.getFollowedHashtags().call()).map(element => web3js.utils.toUtf8(element))
+        if(topHashtags.length == 0) {
+            topHashtagBlock = 'There are no hashtags yet, come back later!'
+        } else {
+            topHashtagBlock = topHashtags.map((hashtag, index) => (
+                <div key={index}>
+                    <Hashtag
+                        hashtag={hashtag}
+                        contract={this.state.contract}
+                        subscribe={hashtag => this.subscribe(hashtag)}
+                        unsubscribe={hashtag => this.unsubscribe(hashtag)}
+                    />
+                </div>
+            ))
+        }
+        if(followedHashtags.length == 0) {
+            followedHashtagsBlock = "You're not following any hashtags yet"
+        } else {
+            followedHashtagsBlock = followedHashtags.map((hashtag, index) => (
+                <div key={index}>
+                    <Hashtag
+                        hashtag={hashtag}
+                        contract={this.state.contract}
+                        subscribe={hashtag => this.subscribe(hashtag)}
+                        unsubscribe={hashtag => this.unsubscribe(hashtag)}
+                    />
+                </div>
+            ))
+        }
+        this.setState({topHashtagBlock, followedHashtagsBlock, followedHashtags})
+    }
+
+    async getContent() {
+        const latestContentId = await this.state.contract.methods.latestContentId().call()
+        const amount = 10
+        const amountPerHashtag = 3
+        let contents = []
+        let counter = amount
+        // If we have subscriptions, get content for those subscriptions
+        if(this.state.followedHashtags.length > 0) {
+            for(let i = 0; i < this.state.followedHashtags.length; i++) {
+                // Get 3 contents per hashtag
+                let contentIds = await this.state.contract.methods.getContentIdsByHashtag(this.bytes32(this.state.followedHashtags[i]), 3).call()
+                let counterTwo = amountPerHashtag
+                if(contentIds < amountPerHashtag) counterTwo = contentIds
+                for(let a = counterTwo - 1; a >= 0; a--) {
+                    let content = await this.state.contract.methods.getContentById(i).call()
+                    content = {
+                        id: content[0],
+                        author: content[1],
+                        time: new Date(parseInt(content[2] + '000')).toLocaleDateString(),
+                        message: content[3],
+                        hashtags: content[4],
+                    }
+                    content.message = web3js.utils.toUtf8(content.message)
+                    content.hashtags = content.hashtags.map(hashtag => web3js.utils.toUtf8(hashtag))
+                    contents.push(content)
+                }
+            }
+        }
+
+        // If we don't have enough content yet, show whats in there
+        if(latestContentId < amount) counter = latestContentId
+        for(let i = counter - 1; i >= 0; i--) {
+            let content = await this.state.contract.methods.getContentById(i).call()
+            content = {
+                id: content[0],
+                author: content[1],
+                time: new Date(parseInt(content[2] + '000')).toLocaleDateString(),
+                message: content[3],
+                hashtags: content[4],
+            }
+            content.message = web3js.utils.toUtf8(content.message)
+            content.hashtags = content.hashtags.map(hashtag => web3js.utils.toUtf8(hashtag))
+            contents.push(content)
+        }
+
+        let contentsBlock = await Promise.all(contents.map(async (element, index) => (
+            <div key={index} className="content">
+                <div className="content-address">{element.author}</div>
+                <div className="content-message">{element.message}</div>
+                <div className="content-hashtags">{element.hashtags.map((hashtag, i) => (
+                    <span key={i}>
+                        <Hashtag
+                            hashtag={hashtag}
+                            contract={this.state.contract}
+                            subscribe={hashtag => this.subscribe(hashtag)}
+                            unsubscribe={hashtag => this.unsubscribe(hashtag)}
+                        />
+                    </span>
+                ))}
+                </div>
+                <div className="content-time">{element.time}</div>
+            </div>
+        )))
+
+        this.setState({contentsBlock})
+    }
+
+    async subscribe(hashtag) {
+        try {
+            await this.state.contract.methods.subscribeToHashtag(this.bytes32(hashtag)).send({from: this.state.user})
+        } catch(e) { console.log(e) }
+        await this.getHashtags()
+        await this.getContent()
+    }
+
+    async unsubscribe(hashtag) {
+        try {
+            await this.state.contract.methods.unsubscribeToHashtag(this.bytes32(hashtag)).send({from: this.state.user})
+        } catch(e) { console.log(e) }
+        await this.getHashtags()
+        await this.getContent()
+    }
+
+    render() {
+        return (
+            <div className="main-container">
+                <div className="hashtag-block">
+                    <h3>Top hashtags</h3>
+                    <div className="hashtag-container">{this.state.topHashtagBlock}</div>
+                    <h3>Followed hashtags</h3>
+                    <div className="hashtag-container">{this.state.followedHashtagsBlock}</div>
+                </div>
+                <div className="content-block">
+                    <div className="input-container">
+                        <textarea ref="content" placeholder="Publish content..."></textarea>
+                        <input ref="hashtags" type="text" placeholder="Hashtags separated by commas without the # sign..."/>
+                        <button onClick={() => {
+                            this.publishContent(this.refs.content.value, this.refs.hashtags.value)
+                        }} type="button">Publish</button>
+                    </div>
+
+                    <div className="content-container">
+                        {this.state.contentsBlock}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+class Hashtag extends React.Component {
+    constructor(props) {
+        super()
+        this.state = {
+            displaySubscribe: false,
+            displayUnsubscribe: false,
+            checkSubscription: false,
+            isSubscribed: false,
+        }
+    }
+
+    componentDidMount() {
+        this.checkExistingSubscription()
+    }
+
+    bytes32(name) {
+        let nameHex = web3js.utils.toHex(name)
+        for(let i = nameHex.length; i < 66; i++) {
+            nameHex = nameHex + '0'
+        }
+        return nameHex
+    }
+
+    async checkExistingSubscription() {
+        const isSubscribed = await this.props.contract.methods.checkExistingSubscription(this.bytes32(this.props.hashtag)).call()
+        this.setState({isSubscribed})
+    }
+
+    render() {
+        return (
+            <span onMouseEnter={async () => {
+                if(this.state.checkSubscription) await this.checkExistingSubscription()
+                if(!this.state.isSubscribed) {
+                    this.setState({
+                        displaySubscribe: true,
+                        displayUnsubscribe: false,
+                    })
+                } else {
+                    this.setState({
+                        displaySubscribe: false,
+                        displayUnsubscribe: true,
+                    })
+                }
+            }} onMouseLeave={() => {
+                this.setState({
+                    displaySubscribe: false,
+                    displayUnsubscribe: false,
+                })
+            }}>
+                <a className="hashtag" href="#">#{this.props.hashtag}</a>
+                <span className="spacer"></span>
+                <button onClick={() => {
+                    this.props.subscribe(this.props.hashtag)
+                    this.setState({checkSubscription: true})
+                }} className={this.state.displaySubscribe ? '' : 'hidden'} type="button">Subscribe</button>
+                <button onClick={() => {
+                    this.props.unsubscribe(this.props.hashtag)
+                    this.setState({checkSubscription: true})
+                }} className={this.state.displayUnsubscribe ? '' : 'hidden'} type="button">Unsubscribe</button>
+                <span className="spacer"></span>
+            </span>
+        )
+    }
+}
+
+ReactDOM.render(<Main />, document.querySelector('#root'))

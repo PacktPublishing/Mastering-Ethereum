@@ -62,7 +62,7 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 ## Get to Know the Author
 **Merunas Grincalaitis**
-Merunas Grincalaitis, born in Lithuania and based in Spain since he was 4, has worked with blockchain companies all around the world, helping them create ICOs, dApps, MVPs, technical whitepapers, web apps, and audits so that they improve the Ethereum ecosystem with decentralized solutions that return people's trust in themselves. 
+, born in Lithuania and based in Spain since he was 4, has worked with blockchain companies all around the world, helping them create ICOs, dApps, MVPs, technical whitepapers, web apps, and audits so that they improve the Ethereum ecosystem with decentralized solutions that return people's trust in themselves. 
 He created one of the first books about Ethereum development, named Ethereum Developer - Learn Solidity From Scratch, which sold a lot of copies worldwide, as a quick guide to provide a bridge for programmers interested in the world of Ethereum and smart contract programming.
 Currently, he's working on providing free learning resources through his Medium blog to all developers looking for expert guidance.
 

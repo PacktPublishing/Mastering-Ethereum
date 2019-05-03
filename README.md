@@ -1,5 +1,5 @@
 
-<a href="https://www.packtpub.com/big-data-and-business-intelligence/mastering-ethereum?utm_source=github&utm_medium=repository&utm_campaign="><img src="" alt="" height="256px" align="right"></a>
+<a href="https://www.packtpub.com/big-data-and-business-intelligence/mastering-ethereum?utm_source=github&utm_medium=repository&utm_campaign="><img src="https://images-na.ssl-images-amazon.com/images/I/61BXmDzWaGL.jpg" alt="" height="256px" align="right"></a>
 
 This is the code repository for [Mastering Ethereum](https://www.packtpub.com/big-data-and-business-intelligence/mastering-ethereum?utm_source=github&utm_medium=repository&utm_campaign=), published by Packt.
 
@@ -22,7 +22,7 @@ This book covers the following exciting features:
 * Explore web3.js, Solidity, and Vyper for dApps communication
 * Deploy apps with multiple Ethereum instances including TestRPC, private chain, test chain, and mainnet
 
-If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1-789-53137-3) today!
+If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1789531373) today!
 
 
 ## Instructions and Navigations

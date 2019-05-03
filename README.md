@@ -1,8 +1,7 @@
-# 
 
 <a href="https://www.packtpub.com/big-data-and-business-intelligence/mastering-ethereum?utm_source=github&utm_medium=repository&utm_campaign="><img src="" alt="" height="256px" align="right"></a>
 
-This is the code repository for [](https://www.packtpub.com/big-data-and-business-intelligence/mastering-ethereum?utm_source=github&utm_medium=repository&utm_campaign=), published by Packt.
+This is the code repository for [Mastering Ethereum](https://www.packtpub.com/big-data-and-business-intelligence/mastering-ethereum?utm_source=github&utm_medium=repository&utm_campaign=), published by Packt.
 
 **Implement advanced blockchain applications using Ethereum-supported tools, services, and protocols**
 
@@ -15,13 +14,13 @@ By the end of this book, you will have the expertise you need to build decentral
 
 This book covers the following exciting features:
 
-*Apply scalability solutions on dApps with Plasma and state channels
-*Understand the important metrics of blockchain for analyzing and determining its state
-*Develop a decentralized web application using React.js and Node.js
-*Create oracles with Node.js to provide external data to smart contracts
-*Get to grips with using Etherscan and block explorers for various transactions
-*Explore web3.js, Solidity, and Vyper for dApps communication
-*Deploy apps with multiple Ethereum instances including TestRPC, private chain, test chain, and mainnet
+* Apply scalability solutions on dApps with Plasma and state channels
+* Understand the important metrics of blockchain for analyzing and determining its state
+* Develop a decentralized web application using React.js and Node.js
+* Create oracles with Node.js to provide external data to smart contracts
+* Get to grips with using Etherscan and block explorers for various transactions
+* Explore web3.js, Solidity, and Vyper for dApps communication
+* Deploy apps with multiple Ethereum instances including TestRPC, private chain, test chain, and mainnet
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1-789-53137-3) today!
 
@@ -58,7 +57,10 @@ With the following software and hardware list you can run all code files present
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://www.packtpub.com/sites/default/files/downloads/9781789531374_ColorImages.pdf).
 
 ### Related products
-*  [[https://www.packtpub.com/big-data-and-business-intelligence/ethereum-cookbook]](Ethereum Cookbook) [[https://www.amazon.com/Ethereum-Cookbook-Ethereum-based-contracts-protocols-ebook/dp/B07CSMLC1K]]
+* Ethereum Cookbook [[Packt]](https://www.packtpub.com/big-data-and-business-intelligence/ethereum-cookbook)[[Amazon]](https://www.amazon.com/Ethereum-Cookbook-Ethereum-based-contracts-protocols-ebook/dp/B07CSMLC1K)
+
+* Ethereum Projects for Beginners [[Packt]](https://www.packtpub.com/big-data-and-business-intelligence/ethereum-projects-beginners)[[Amazon]](https://www.amazon.com/Ethereum-Projects-Beginners-blockchain-based-cryptocurrencies-ebook/dp/B07FY84XCS)
+
 
 * [[https://www.packtpub.com/big-data-and-business-intelligence/ethereum-projects-beginners]](Ethereum Projects for Beginners)
 [[https://www.amazon.com/Ethereum-Projects-Beginners-blockchain-based-cryptocurrencies-ebook/dp/B07FY84XCS]]

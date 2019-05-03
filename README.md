@@ -7,10 +7,21 @@ This is the code repository for [](https://www.packtpub.com/big-data-and-busines
 **Implement advanced blockchain applications using Ethereum-supported tools, services, and protocols**
 
 ## What is this book about?
-0
+Ethereum is one of the commonly used platforms for building blockchain applications. It's a decentralized platform for applications that can run exactly as programmed without being affected by fraud, censorship, or third-party interference.
+
+This book will give you a deep understanding of how blockchain works so that you can discover the entire ecosystem, core components, and its implementations. You will get started by understanding how to configure and work with various Ethereum protocols for developing dApps. Next, you will learn to code and create powerful smart contracts that scale with Solidity and Vyper. You will then explore the building blocks of the dApps architecture, and gain insights on how to create your own dApp through a variety of real-world examples. The book will even guide you on how to deploy your dApps on multiple Ethereum instances with the required best practices and techniques. The next few chapters will delve into advanced topics such as, building advanced smart contracts and multi-page frontends using Ethereum blockchain. You will also focus on implementing machine learning techniques to build decentralized autonomous applications, in addition to covering several use cases across a variety of domains such as, social media and e-commerce. 
+
+By the end of this book, you will have the expertise you need to build decentralized autonomous applications confidently.
 
 This book covers the following exciting features:
 
+*Apply scalability solutions on dApps with Plasma and state channels
+*Understand the important metrics of blockchain for analyzing and determining its state
+*Develop a decentralized web application using React.js and Node.js
+*Create oracles with Node.js to provide external data to smart contracts
+*Get to grips with using Etherscan and block explorers for various transactions
+*Explore web3.js, Solidity, and Vyper for dApps communication
+*Deploy apps with multiple Ethereum instances including TestRPC, private chain, test chain, and mainnet
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1-789-53137-3) today!
 
@@ -43,23 +54,14 @@ With the following software and hardware list you can run all code files present
 | All | Solidity | Windows, Mac OS X, and Linux (Any) |
 | All | React.js | Windows, Mac OS X, and Linux (Any) |
 | All | Truffle | Windows, Mac OS X, and Linux (Any) |
-|  |  | Windows, Mac OS X, and Linux (Any) |
-|  |  | Windows, Mac OS X, and Linux (Any) |
-|  |  | Windows, Mac OS X, and Linux (Any) |
-|  |  | Windows, Mac OS X, and Linux (Any) |
-|  |  | Windows, Mac OS X, and Linux (Any) |
-|  |  | Windows, Mac OS X, and Linux (Any) |
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://www.packtpub.com/sites/default/files/downloads/9781789531374_ColorImages.pdf).
 
 ### Related products
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
+*  [[https://www.packtpub.com/big-data-and-business-intelligence/ethereum-cookbook]](Ethereum Cookbook) [[https://www.amazon.com/Ethereum-Cookbook-Ethereum-based-contracts-protocols-ebook/dp/B07CSMLC1K]]
 
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
-
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
-
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
+* [[https://www.packtpub.com/big-data-and-business-intelligence/ethereum-projects-beginners]](Ethereum Projects for Beginners)
+[[https://www.amazon.com/Ethereum-Projects-Beginners-blockchain-based-cryptocurrencies-ebook/dp/B07FY84XCS]]
 
 ## Get to Know the Author
 **Merunas Grincalaitis**
@@ -67,28 +69,6 @@ Merunas Grincalaitis, born in Lithuania and based in Spain since he was 4, has w
 He created one of the first books about Ethereum development, named Ethereum Developer - Learn Solidity From Scratch, which sold a lot of copies worldwide, as a quick guide to provide a bridge for programmers interested in the world of Ethereum and smart contract programming.
 Currently, he's working on providing free learning resources through his Medium blog to all developers looking for expert guidance.
 
-****
-0
-
-****
-0
-
-****
-0
-
-****
-0
-
-## Other books by the authors
-[]()
-
-[]()
-
-[]()
-
-[]()
-
-[]()
 
 ### Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.

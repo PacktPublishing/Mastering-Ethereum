@@ -24,8 +24,6 @@ This book covers the following exciting features:
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1-789-53137-3) today!
 
-<a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
-alt="https://www.packtpub.com/" border="5" /></a>
 
 ## Instructions and Navigations
 All of the code is organized into folders. For example, Chapter02.
@@ -61,9 +59,6 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 * Ethereum Projects for Beginners [[Packt]](https://www.packtpub.com/big-data-and-business-intelligence/ethereum-projects-beginners)[[Amazon]](https://www.amazon.com/Ethereum-Projects-Beginners-blockchain-based-cryptocurrencies-ebook/dp/B07FY84XCS)
 
-
-* [[https://www.packtpub.com/big-data-and-business-intelligence/ethereum-projects-beginners]](Ethereum Projects for Beginners)
-[[https://www.amazon.com/Ethereum-Projects-Beginners-blockchain-based-cryptocurrencies-ebook/dp/B07FY84XCS]]
 
 ## Get to Know the Author
 **Merunas Grincalaitis**

@@ -1,3 +1,7 @@
+## [Get this title for $10 on Packt's Spring Sale](https://www.packt.com/B11696?utm_source=github&utm_medium=packt-github-repo&utm_campaign=spring_10_dollar_2022)
+-----
+For a limited period, all eBooks and Videos are only $10. All the practical content you need \- by developers, for developers
+
 # Mastering Ethereum
 
 <a href="https://www.packtpub.com/big-data-and-business-intelligence/mastering-ethereum?utm_source=github&utm_medium=repository&utm_campaign="><img src="https://images-na.ssl-images-amazon.com/images/I/61BXmDzWaGL.jpg" alt="" height="256px" align="right"></a>
